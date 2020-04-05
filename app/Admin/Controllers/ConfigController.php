@@ -2,20 +2,20 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\Category;
+use App\Models\Config;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class CategoryController extends AdminController
+class ConfigController extends AdminController
 {
     /**
      * Title for current resource.
      *
      * @var string
      */
-    protected $title = 'App\Models\Category';
+    protected $title = 'App\Models\Config';
 
     /**
      * Make a grid builder.
@@ -24,16 +24,21 @@ class CategoryController extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new Category());
+        $grid = new Grid(new Config());
 
         $grid->column('id', __('Id'));
         $grid->column('title', __('Title'));
-        // $grid->column('parent_id', __('Parent id'));
-        // $grid->column('path', __('Path'));
-        $grid->column('needcoin', __('Needcoin'));
+        $grid->column('content', __('Content'));
+        $grid->column('remark', __('Remark'));
+        // 不存在的字段
+        $grid->column('qiantaiuse', __('前台调用'))->display(function($qiantaiuse){
+            return "{{configs('".$this->title."')}}";
+        });
         // $grid->column('deleted_at', __('Deleted at'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
+
+        $grid->model()->orderBy('id','desc');
 
         return $grid;
     }
@@ -46,14 +51,13 @@ class CategoryController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(Category::findOrFail($id));
+        $show = new Show(Config::findOrFail($id));
 
         $show->field('id', __('Id'));
         $show->field('title', __('Title'));
-        // $show->field('parent_id', __('Parent id'));
-        // $show->field('path', __('Path'));
-        $show->field('needcoin', __('Needcoin'));
-        // $show->field('deleted_at', __('Deleted at'));
+        $show->field('content', __('Content'));
+        $show->field('remark', __('Remark'));
+        $show->field('deleted_at', __('Deleted at'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
@@ -67,12 +71,11 @@ class CategoryController extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new Category());
+        $form = new Form(new Config());
 
         $form->text('title', __('Title'));
-        // $form->number('parent_id', __('Parent id'));
-        // $form->text('path', __('Path'));
-        $form->number('needcoin', __('Needcoin'))->default(1)->help('填写该栏目文章下载所需积分');
+        $form->textarea('content', __('Content'));
+        $form->text('remark', __('Remark'));
 
         return $form;
     }

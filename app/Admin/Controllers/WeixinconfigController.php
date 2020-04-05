@@ -26,7 +26,13 @@ class WeixinconfigController extends AdminController
     {
         $grid = new Grid(new Weixinconfig());
 
-
+        $grid->column('id', __('Id'));
+        $grid->select('weixin_id', __('Weixin id'));
+        $grid->column('welcometext', __('Welcometext'));
+        $grid->column('defaulttext', __('Defaulttext'));
+        $grid->column('returnnum', __('Returnnum'));
+        $grid->column('created_at', __('Created at'));
+        $grid->column('updated_at', __('Updated at'));
 
         return $grid;
     }
@@ -41,7 +47,13 @@ class WeixinconfigController extends AdminController
     {
         $show = new Show(Weixinconfig::findOrFail($id));
 
-
+        $show->field('id', __('Id'));
+        $show->field('weixin_id', __('Weixin id'));
+        $show->field('welcometext', __('Welcometext'));
+        $show->field('defaulttext', __('Defaulttext'));
+        $show->field('returnnum', __('Returnnum'));
+        $show->field('created_at', __('Created at'));
+        $show->field('updated_at', __('Updated at'));
 
         return $show;
     }
@@ -55,8 +67,15 @@ class WeixinconfigController extends AdminController
     {
         $form = new Form(new Weixinconfig());
 
+        $form->column(2/3, function ($form) {
 
-
-        return $form;
+            
+            $form->select('weixin_id', __('Weixin id'))->options('/admin/api/getweixins')->width(2);
+            $form->text('welcometext', __('Welcometext'));
+            $form->editor('defaulttext', __('Defaulttext'));
+            $form->number('returnnum', __('Returnnum'))->default(3);
+            
+        });
+            return $form;
     }
 }

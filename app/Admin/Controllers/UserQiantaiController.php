@@ -9,6 +9,8 @@ use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Encore\Admin\Layout\Content;
+use App\Admin\Forms\Setting;
 
 class UserQiantaiController extends AdminController
 {
@@ -38,12 +40,20 @@ class UserQiantaiController extends AdminController
         $grid->column('wechat', __('Wechat'));
         $grid->column('phone', __('Phone'));
         $grid->column('coin', __('Coin'));
+        $grid->column('userrole_id',__('用户组'))->display(function($userrole_id){
+            if($userrole_id){
+                return \App\Models\Userrole::find($userrole_id)->title;
+            }else{
+                return "普通会员";
+            }
+        });
         // $grid->column('remark', __('Remark'));
         // $grid->column('path', __('Path'));
-        $grid->column('deleted_at', __('Deleted at'));
+        // $grid->column('deleted_at', __('Deleted at'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
         $grid->column('expiration_date', __('Expiration date'))->date('Y-m-d');
+
         $grid->model()->orderBy('id', 'desc');
         
         $grid->quickSearch('username','email','name');
@@ -53,7 +63,7 @@ class UserQiantaiController extends AdminController
             $actions->disableDelete();
         
             // 去掉编辑
-            $actions->disableEdit();
+            // $actions->disableEdit();
         
             // 去掉查看
             // $actions->disableView();
@@ -81,6 +91,7 @@ class UserQiantaiController extends AdminController
         $show->field('wechat', __('Wechat'));
         $show->field('phone', __('Phone'));
         $show->field('coin', __('Coin'));
+        $show->field('userrole_id',__('用户组'));
         $show->field('remark', __('Remark'));
         $show->field('path', __('Path'));
         $show->field('deleted_at', __('Deleted at'));
@@ -116,6 +127,7 @@ class UserQiantaiController extends AdminController
         $form->text('wechat', __('Wechat'));
         $form->mobile('phone', __('Phone'));
         $form->number('coin', __('Coin'));
+        $form->select('userrole_id',__('用户组'))->options('/admin/api/getuserroles');
         $form->editor('remark', __('Remark'));
         $form->text('path', __('Path'));
         $form->date('expiration_date', __('Expiration date'))->default(date('Y-m-d'));
@@ -126,15 +138,28 @@ class UserQiantaiController extends AdminController
     public function upload(Request $request)
     {
         $urls = [];
-
         foreach ($request->file() as $file) {
             $path = $file->store('images');
             $urls[] = Storage::url($path);
         }
-
         return [
             "errno" => 0,
             "data"  => $urls,
         ];
+    }
+
+
+    public function setting(Content $content)
+    {
+        $content
+            ->title('查询')
+            ->row(new Setting());
+
+        // 如果有从后端返回的数据，那么从session中取出，显示在表单下面
+        if ($result = session('result')) {
+            $content->row('<pre>'.json_encode($result).'</pre>');
+        }
+
+        return $content;
     }
 }

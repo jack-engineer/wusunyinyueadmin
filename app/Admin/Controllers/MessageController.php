@@ -77,11 +77,29 @@ class MessageController extends AdminController
 
         $form->text('title', __('Title'));
         $form->editor('content', __('Content'));
-        $form->text('from_uid', __('From uid'));
-        $form->text('to_uid', __('To uid'));
-        $form->text('type', __('Type'));
-        $form->switch('status', __('Status'));
+        $form->text('from_uid', __('发消息人 '))->default('sys_manager_'.\Admin::user()->id);
+
+        // $form->select('to_uid', __('发消息给'))->options('/admin/api/getusers');
+        $form->multipleSelect('to_uid')->options(function(){
+            return \App\Models\User::all()->pluck('username', 'id');
+        });
+
+        // // 通过闭包设置options
+        // $form->checkbox('to_uid')->options(function () {
+        //     return \App\Models\User::all()->pluck('username', 'id');
+        // })->canCheckAll();
+        
+        $form->text('type', __('消息类型'))->default('sys');
+        $form->switch('status', __('状态'))->disable();
+
+      
 
         return $form;
+    }
+
+    public function store1(){
+        $form = new Form(new Message());
+
+        dd($form->post());
     }
 }

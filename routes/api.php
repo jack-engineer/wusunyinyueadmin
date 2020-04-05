@@ -17,13 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-// 获取栏目列表api
-Route::get('categories',function(){
-    $arr = App\Models\Category::all()->toArray();
-    $res = [];
-    foreach($arr as $k=>$v){
-        $res[$k]['id']=$v['id'];
-        $res[$k]['text'] = $v['title'];
-    }
-    return ($res);
-});
+
+
+
+

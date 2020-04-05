@@ -3,6 +3,7 @@
 use Illuminate\Routing\Router;
 
 
+
 Admin::routes();
 
 Route::group([
@@ -10,7 +11,6 @@ Route::group([
     'namespace'     => config('admin.route.namespace'),
     'middleware'    => config('admin.route.middleware'),
 ], function (Router $router) {
-
     $router->get('/', 'HomeController@index')->name('admin.home');
     // 用户管理
     $router->resource('users', UserQiantaiController::class);
@@ -18,6 +18,8 @@ Route::group([
     $router->resource('weixinconfigs', WeixinconfigController::class);
     // 微信管理
     $router->resource('weixins', WeixinController::class);
+    // 微信配置
+    $router->resource('weixinconfigs', WeixinconfigController::class);
     // 文章管理
     $router->resource('articles', ArticleController::class);
     // 栏目管理
@@ -34,7 +36,17 @@ Route::group([
     $router->resource('messages', MessageController::class);
     // 消息模板管理
     $router->resource('messagetemplates', MessagetemplateController::class);
+    //用户订单管理
+    $router->resource('userorders', UserorderController::class);
+    // 评论管理
+    $router->resource('comments', CommentController::class);
+    // 标签云管理
+    $router->resource('tags', TagController::class);
+    // 系统配置
+    $router->resource('configs', ConfigController::class);
 
+    $router->get('usersetting','UserQiantaiController@setting');
     
+    // wangEditor富文本编辑器上传图片路由
     $router->any('upload',"UserQiantaiController@upload");
 });
