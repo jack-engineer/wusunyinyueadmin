@@ -45,7 +45,7 @@
                 <ul>
                     <li class="payfs"><span class="fl pr30">支付方式：</span><a href="javascript:void();" class="hover" payfs="6" pay_mode=""><span></span>
                     <img src="{{asset('images/zfb.jpg')}}"></a> <a href="javascript:void();" payfs="6" pay_mode="wechat"><span></span>
-                    <img src="{{asset('images/wx.jpg')}}"></a> <div class="clearfix"></div></li>
+                    <img src="{{asset('images/wxzf.jpg')}}"></a> <div class="clearfix"></div></li>
                     <li class="center"><input type="button" onclick="javascript:(alert('暂未开放,请联系网站客服人员进行升级！谢谢'))" name="Submit" value="确定支付" class="rbutton"></li>
                 </ul>
             

@@ -18,6 +18,8 @@ Route::group([
     $router->resource('weixinconfigs', WeixinconfigController::class);
     // 微信管理
     $router->resource('weixins', WeixinController::class);
+    // 微信自动回复
+    $router->resource('auto_replays', Autoreplays::class);
     // 文章管理
     $router->resource('articles', ArticleController::class);
     // 栏目管理

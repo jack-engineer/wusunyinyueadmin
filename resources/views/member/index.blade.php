@@ -8,17 +8,23 @@
                 <span class="corg">{{getTitleFromId(Auth::guard('web')->user()->userrole_id,'userroles')}}</span><br>
                 <span class="c666">注册时间: {{Auth::guard('web')->user()->created_at}}</span>
                 
-                @if(getUserLevel(Auth::guard('web')->id()) > 0 )
+                @if(!empty(Auth::guard('web')->user()->expiration_date) )
                 <span class="c666">过期时间: {{Auth::guard('web')->user()->expiration_date}}</span>
+                @if(Auth::guard('web')->user()->expiration_date < now())
+                  <span style="color:red;font-weight:bold">(已过期)</span>
+                @endif
                 @else
                 <span class="c666">过期时间: 长期有效</span>
                 @endif
+
             </div>
         </div>
         <div class="jfz fl">
+        <strong><a href="{{url('member/coinlog')}}"><font color="red">我的积分：{{Auth::guard('web')->user()->coin}}</font></a></strong><br>
         <strong><a href="{{url('buygroup')}}"><font color="red">升级会员</font></a></strong><br>
         尊享真正的无损音乐！<br>
-        高品质，高保真！
+        高品质，高保真！ <br>
+
         </div>
         <div class="clearfix"></div>
       </div>

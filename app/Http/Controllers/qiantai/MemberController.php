@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Message;
 use App\Models\UserOrder;
 use App\Models\Article;
+use App\Models\Usercoinlog;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -116,6 +117,13 @@ class MemberController extends Controller
         $userorder = UserOrder::where('user_id',"=",$user->id)->whereNull('deleted_at')->orderBy('id','desc')->paginate(10);
         // dd($userorder);
         return view('member.buylist',['user'=>$this->user,'userorder'=>$userorder ]);
+    }
+    // 用户的积分记录
+    public function coinlog(){
+        $user = Auth::guard('web')->user();
+        $coinlog = Usercoinlog::where('user_id',"=",$user->id)->orderBy('id','desc')->paginate(10);
+        // dd($userorder);
+        return view('member.coinlog',['user'=>$this->user,'coinlog'=>$coinlog ]);
     }
 
     public function msg()

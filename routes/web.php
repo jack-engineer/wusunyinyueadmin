@@ -44,11 +44,16 @@ Route::group(['middleware'=>'CheckUser'],function(){
         Route::any('editsafeinfo',"MemberController@editsafeinfo");
         Route::get('buygroup',"MemberController@buygroup");
         Route::get('buylist',"MemberController@buylist");
+        
+        Route::get('coinlog',"MemberController@coinlog");
+
         Route::get('msg',"MemberController@msg");
         Route::get('msg/del/{id}',"MemberController@del");
         Route::get('msg/read/{id}',"MemberController@read");
         Route::get("download/{id}","ArticleController@download");
         Route::get("downok/{id}","ArticleController@downok");
+        Route::get("downloadusecoin/{id}",'ArticleController@downloadusecoin');
+        Route::get("downokusecoin/{id}",'ArticleController@downokusecoin');
         // 发表评论路由
         // Route::post('comments', 'CommentsController@index');
         Route::post('comments/store', 'CommentsController@store');

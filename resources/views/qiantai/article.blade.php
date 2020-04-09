@@ -40,20 +40,29 @@
     @else
     截至到{{Auth::guard('web')->user()->expiration_date}}
     @endif
-  </span>)</font>,如您需要升级，请点击<a target="_blank" style="color:red;font-weight:bold" href="{{url('vip')}}">升级</a> <br>
+  </span>)</font>,如您需要升级，请点击<a target="_blank" class="btn btn-success" href="{{url('vip')}}">升级</a> <br>
+
     您有任何问题，请联系本站管理员<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin={{configs('客服QQ')}}&amp;site=qq&amp;menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:372009617:51" alt="点击这里给我发消息" title="点击这里给我发消息"></a>
+
+    <div class="span" class="border border-success border-0 " style="padding:15px;font-size:14px">
+      @if(Auth::guard('web')->user()->coin>=$article->needcoin)
+    您还可以使用积分下载，该文章需要<span class="text-danger font-weight-bold">{{$article->needcoin}}</span>积分可以下载，您有<span class="text-danger font-weight-bold">{{Auth::guard('web')->user()->coin}}</span>积分<a href="{{url('/member/downloadusecoin'.'/'.$article->id)}}" class="btn btn-success">点击使用积分下载</a>
+      @else
+    该歌曲需要<span class="text-danger font-weight-bold">{{$article->needcoin}}</span>积分可以下载，您有<span class="text-danger font-weight-bold">{{Auth::guard('web')->user()->coin}}</span>积分，积分不足，请 <a class="btn btn-success" target="_blank" href="{{url('vip')}}">充值</a>
+      @endif
+    </div>
   @else
     您还没有登录，查看下载链接，请点击<a style="color:red" href="{{url('login'.'/'.base64_encode(url()->current()))}}">登录</a>
   @endif
 </div>
 @endif
 <br>
-<div style="text-align:center;">
+{{-- <div style="text-align:center;">
   提取码:<font color="red" size="4px" id="target">{{$article->downpassword}}</font>
   <button class="btn btn-primary" data-clipboard-action="copy" data-clipboard-target="#target" id="copy_btn">    
       点击复制提取码
   </button> 
-</div>
+</div> --}}
  
 <div class="ad mb15 sjwu">
     <table width="100%" height="90" bgcolor="">

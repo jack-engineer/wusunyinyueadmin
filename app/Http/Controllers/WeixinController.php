@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use EasyWeChat\Factory;
-use App\Models\Wx_weixins;
-use App\Models\Wx_config;
+use App\Models\Weixin;
+use App\Models\Weixinconfig;
 use App\Models\Article;
 use App\Models\Auto_replay;
 
@@ -20,7 +20,7 @@ class WeixinController extends Controller
     public $returnCategory;
     
     public function index($id){
-    	$weixin = Wx_weixins::findOrFail($id);
+    	$weixin = Weixin::findOrFail($id);
     	
     	$this->default_welcometext = $weixin->welcometext?:(configs('微信系统默认关注回复语'));
     	$this->default_defaulttext = $weixin->defaulttext?:(configs('微信未识别的回复'));

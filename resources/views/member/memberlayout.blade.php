@@ -18,6 +18,7 @@
 
         <!--  <li><a href="/e/member/card/">红包充值</a></li>-->
         <li><a href="{{url('member/buylist')}}" {!! Request::is('member/buylist') ? ' class="hover"' : '' !!}>充值记录</a></li>
+        <li><a href="{{url('member/coinlog')}}" {!! Request::is('member/coinlog') ? ' class="hover"' : '' !!}>积分记录</a></li>
       </ul>
       <!-- <h3>我的交易</h3>
       <ul>
