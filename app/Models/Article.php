@@ -29,4 +29,16 @@ class Article extends Model
     {
         $this->attributes['tags'] = implode(',', $value);
     }
+
+    /**
+     * 获取该文章的附件
+     */
+    public function enclosures()
+    {
+         return $this->hasMany('App\Models\Enclosure','article_id','id');
+    }
+
+    public function comments(){
+        return $this->hasMany("App\Models\Comment","article_id",'id');
+    }
 }

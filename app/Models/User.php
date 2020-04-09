@@ -13,7 +13,7 @@ class User extends Model
     use DefaultDatetimeFormat;
 
 
-    protected $table = 'users_qiantai';
+    protected $table = 'users';
 
 
     

@@ -18,8 +18,6 @@ Route::group([
     $router->resource('weixinconfigs', WeixinconfigController::class);
     // 微信管理
     $router->resource('weixins', WeixinController::class);
-    // 微信配置
-    $router->resource('weixinconfigs', WeixinconfigController::class);
     // 文章管理
     $router->resource('articles', ArticleController::class);
     // 栏目管理
@@ -38,12 +36,16 @@ Route::group([
     $router->resource('messagetemplates', MessagetemplateController::class);
     //用户订单管理
     $router->resource('userorders', UserorderController::class);
+    // 用户积分记录
+    $router->resource('usercoinlogs', UsercoinlogController::class);
     // 评论管理
     $router->resource('comments', CommentController::class);
     // 标签云管理
     $router->resource('tags', TagController::class);
     // 系统配置
     $router->resource('configs', ConfigController::class);
+    // 菜单管理
+    $router->resource('menus', MenuController::class);
 
     $router->get('usersetting','UserQiantaiController@setting');
     

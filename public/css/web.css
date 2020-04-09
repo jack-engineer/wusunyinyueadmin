@@ -1,0 +1,45 @@
+body{
+    background-image: url(../images/bg.gif);
+}
+.navbar-nav{
+    margin-top: 30px;
+}
+.navbar-nav a{
+    color: #6d492e;
+    font-size: 16px;
+    font-weight: 600;
+}
+.zhuce1 a{
+    color: aliceblue;
+}
+.news{
+    background-color: #F7F5F2;
+}
+.margintop10{
+    margin-top:10px;
+}
+
+.margintop20{
+    margin-top:20px;
+}
+.marginbottom20{
+    margin-bottom: 20px;
+}
+.bottomred{
+    border-bottom:1px solid #964000;
+}
+.bottomred p{
+    font-size: 28px;
+}
+.font12{
+    font-size: 12px;
+}
+.font28{
+    font-size: 28px;
+}
+.time{
+    float: right;
+    font: 10px/26px Verdana, Arial, Helvetica, sans-serif;
+    color: #636363;
+    padding: 0px;
+}

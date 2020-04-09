@@ -396,6 +396,15 @@ return [
     |
     */
     'extensions' => [
+        'media-manager' => [
+        
+            // Select a local disk that you configured in `config/filesystem.php`
+            'disk' => 'local'
+        ],
+        'env-manager' => [
+            // If the value is set to false, this extension will be disabled
+            'enable' => true
+        ],
         'wang-editor' => [
         
             // 如果要关掉这个扩展，设置为false

@@ -68,6 +68,21 @@ class UserQiantaiController extends AdminController
             // 去掉查看
             // $actions->disableView();
         });
+        // $grid->enableHotKeys();
+       
+        // $grid->selector(function (Grid\Tools\Selector $selector) {
+        //     $selector->select('coin', '积分', ['0-999', '1000-1999', '2000-2999'], function ($query, $value) {
+        //         $between = [
+        //             [0, 999],
+        //             [1000, 1999],
+        //             [2000, 2999],
+        //         ];
+            
+        //         $query->whereBetween('coin', $between[$value]);
+        //     });
+        // });
+
+
         return $grid;
     }
 

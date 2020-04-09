@@ -27,14 +27,19 @@ class GuestbookController extends AdminController
         $grid = new Grid(new Guestbook());
 
         $grid->column('id', __('Id'));
-        $grid->column('user_id', __('User id'));
-        $grid->column('title', __('Title'));
+        $grid->column('user_id', __('User id'))->display(function($user_id){
+            if($user_id){
+                return \App\Models\User::find($user_id)->username;
+            }else{
+                return "无名氏";
+            }
+        });;
         $grid->column('content', __('Content'));
-        $grid->column('remark', __('Remark'));
+        $grid->column('status', __('Status'));
         $grid->column('deleted_at', __('Deleted at'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
-
+        $grid->model()->orderBy('id','desc');
         return $grid;
     }
 
@@ -50,9 +55,8 @@ class GuestbookController extends AdminController
 
         $show->field('id', __('Id'));
         $show->field('user_id', __('User id'));
-        $show->field('title', __('Title'));
         $show->field('content', __('Content'));
-        $show->field('remark', __('Remark'));
+        $show->field('status', __('Status'));
         $show->field('deleted_at', __('Deleted at'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
@@ -70,9 +74,8 @@ class GuestbookController extends AdminController
         $form = new Form(new Guestbook());
 
         $form->number('user_id', __('User id'));
-        $form->text('title', __('Title'));
-        $form->editor('content', __('Content'));
-        $form->text('remark', __('Remark'));
+        $form->textarea('content', __('Content'));
+        $form->switch('status', __('Status'))->default(1);
 
         return $form;
     }
