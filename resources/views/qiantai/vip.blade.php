@@ -31,18 +31,18 @@
 <div class="be-vip pd20 vip-item" style="background-image: linear-gradient(-226deg, rgb(242, 162, 140) 0%, rgb(238, 93, 128) 100%);">
 <div class="vip-name">黄金会员</div>
 <div><del>原价：¥&nbsp;299&nbsp;</del></div>
-<div class="vip-rmb">现价：¥&nbsp;58 / 365天</div>
+<div class="vip-rmb">现价：¥&nbsp;25 / 365天</div>
 <div class="vip-rmb">本网站全部无损音乐（Flac,Wav,Ape）</div>
 <div class="vip-rmb">免费下载：100个/天</div>
-<div class="vip-rmb">每日低至0.15元</div>
-<div class="vip-rmb">尊享VIP专属客服找歌，推荐歌单，一键下载</div>
+<div class="vip-rmb">每日低至0.06元</div>
+<div class="vip-rmb">尊享VIP专属客服，推荐歌单，一键下载</div>
 <br>
 <div class="mar20-t"><a href="" onclick="javascript:(alert('暂未开放,请联系网站客服人员进行升级！谢谢'))"><button>立即开通</button></a></div>
 </div>
 <div class="be-vip pd20 vip-item" style="background-image: linear-gradient(-226deg, rgb(68, 134, 250) 0%, rgb(115, 162, 251) 100%);">
 <div class="vip-name">钻石会员</div>
 <div><del>原价：¥&nbsp;699&nbsp;</del></div>
-<div class="vip-rmb">现价：¥&nbsp;188&nbsp; / 永久</div>
+<div class="vip-rmb">现价：¥&nbsp;88&nbsp; / 永久</div>
 <div class="vip-rmb">
 <div class="vip-rmb" style="font-size: 14.4px;"><span style="font-size: 14.4px;">下载权限</span>：<span style="font-size: 14.4px;">Hi-Res,</span><span style="font-size: 14.4px;">本网站全部无损音乐</span></div>
 </div>
@@ -55,7 +55,7 @@
 <div class="be-vip pd20 vip-item" style="background-image: linear-gradient(-226deg, rgb(219, 70, 225) 0%, rgb(163, 81, 248) 100%);">
 <div class="vip-name">至尊会员</div>
 <div><del>原价：¥&nbsp;999&nbsp;</del></div>
-<div class="vip-rmb">现价：¥&nbsp;298&nbsp; / 永久</div>
+<div class="vip-rmb">现价：¥&nbsp;188&nbsp; / 永久</div>
 <div class="vip-rmb">下载权限：DSD,<span style="font-size: 14.4px;">Hi-Res,</span><span style="font-size: 14.4px;">本网站全部无损音乐</span></div>
 <div class="vip-rmb">免费下载：不限数量/天</div>
 <div class="vip-rmb">尊享VIP专属客服找歌</div>

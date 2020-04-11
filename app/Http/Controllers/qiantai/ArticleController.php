@@ -76,7 +76,7 @@ class ArticleController extends Controller
     public function download($id){
         $article=Article::findorFail($id);
         if(Auth::guard('web')->check() && $this->kanwenzhang(Auth::guard('web')->user(),$article) ){
-            return view('qiantai/download',['article'=>$article]);
+            return view('qiantai/download',['article'=>$article,'usecoin'=>false]);
         }
         abort(404);
     }
@@ -110,6 +110,7 @@ class ArticleController extends Controller
             $usercoinlog->user_id=Auth::guard('web')->id();
             $usercoinlog->content = "歌曲名称:".$article->title."<br>".'链接：'.$article->downlink."<br>密码：".$article->downpassword."<br>";
             $usercoinlog->coinlog -= $article->needcoin;
+            $usercoinlog->coinlogafter = Auth::guard('web')->user()->coin - $article->needcoin;
             $usercoinlog->save();
 
             // 修改用户积分

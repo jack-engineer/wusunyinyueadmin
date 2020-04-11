@@ -52,7 +52,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | The routing configuration of the admin page, including the path prefix,
-    | the controller namespace, and the default middleware. If you want to
+    | the controller namespace, and the default middleware. If you want tabco
     | access through the root path, just set the prefix to empty string.
     |
     */

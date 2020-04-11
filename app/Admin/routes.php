@@ -50,6 +50,8 @@ Route::group([
     $router->resource('menus', MenuController::class);
 
     $router->get('usersetting','UserQiantaiController@setting');
+     // 系统升级记录
+    $router->get('changelog','HomeController@changelog');
     
     // wangEditor富文本编辑器上传图片路由
     $router->any('upload',"UserQiantaiController@upload");

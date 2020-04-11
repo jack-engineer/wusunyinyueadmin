@@ -65,6 +65,14 @@ class UserorderController extends AdminController
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
         $grid->model()->orderBy('id', 'desc');
+        $grid->actions(function ($actions) {
+            // 去掉删除
+            // $actions->disableDelete();
+            // 去掉编辑
+            $actions->disableEdit();
+            // 去掉查看
+            // $actions->disableView();
+        });
         return $grid;
     }
 
@@ -98,11 +106,11 @@ class UserorderController extends AdminController
     protected function form()
     {
         $form = new Form(new Userorder());
-        $form->select('user_id', __('选择用户'))->options('/admin/api/getusers');
+        $form->select('user_id', __('选择用户'))->options('/'.env('ADMIN_ROUTE_PREFIX').'/api/getusers');
         $form->radio('order_type', __('支付方式'))->options(['支付宝'=>'支付宝','微信'=>'微信'])->default('微信');
         $form->decimal('money', __('金额'))->default(100);
         $form->date('expiration_date', __('过期时间'))->default(date('Y-m-d'));
-        $form->select('userrole_id',__('用户组'))->options('/admin/api/getuserroles');
+        $form->select('userrole_id',__('用户组'))->options('/adm'.env('ADMIN_ROUTE_PREFIX').'in/api/getuserroles');
         //保存后回调
         $form->saved(function (Form $form) {
             $user = User::find($form->model()->user_id);

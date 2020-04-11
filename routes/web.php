@@ -123,6 +123,8 @@ Route::group([
     });
     Route::get('api/getCategoryNeedcoin','ArticleController@getCategoryNeedcoin');
 
+   
+
     Route::get('test',function(){
         dd(trans());
     });

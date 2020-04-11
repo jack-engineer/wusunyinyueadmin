@@ -10,6 +10,17 @@ use Encore\Admin\Layout\Row;
 
 class HomeController extends Controller
 {
+    public function changelog(Content $content){
+        return $content
+        ->title('系统升级记录')
+        // ->description('Description...')
+        // ->row(Dashboard::title())
+        ->row(function (Row $row) {
+            $row->column(12, function (Column $column) {
+                $column->append(view('xitong/changelog'));
+            });
+        });  
+    }
     public function index(Content $content)
     {
         return $content
@@ -29,6 +40,15 @@ class HomeController extends Controller
                 $row->column(4, function (Column $column) {
                     $column->append(Dashboard::dependencies());
                 });
+
+            })->row(function (Row $row) {
+
+                $row->column(12, function (Column $column) {
+                    $column->append(view('xitong/changelog'));
+                });
+
+                
+                
             });
     }
 }

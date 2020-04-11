@@ -30,7 +30,7 @@ class CategoryController extends AdminController
         $grid->column('title', __('Title'));
         // $grid->column('parent_id', __('Parent id'));
         // $grid->column('path', __('Path'));
-        $grid->column('needcoin', __('Needcoin'));
+        // $grid->column('needcoin', __('Needcoin'));
         // $grid->column('deleted_at', __('Deleted at'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
@@ -52,7 +52,7 @@ class CategoryController extends AdminController
         $show->field('title', __('Title'));
         // $show->field('parent_id', __('Parent id'));
         // $show->field('path', __('Path'));
-        $show->field('needcoin', __('Needcoin'));
+        // $show->field('needcoin', __('Needcoin'));
         // $show->field('deleted_at', __('Deleted at'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
@@ -72,7 +72,7 @@ class CategoryController extends AdminController
         $form->text('title', __('Title'));
         // $form->number('parent_id', __('Parent id'));
         // $form->text('path', __('Path'));
-        $form->number('needcoin', __('Needcoin'))->default(1)->help('填写该栏目文章下载所需积分');
+        // $form->number('needcoin', __('Needcoin'))->default(1)->help('填写该栏目文章下载所需积分');
 
         return $form;
     }

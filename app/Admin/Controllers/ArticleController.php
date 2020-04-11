@@ -34,7 +34,7 @@ class ArticleController extends AdminController
     {
         $grid = new Grid(new Article());
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable()->totalRow('合计');
         $grid->column('category_id', __('所属栏目'))->display(function($category_id){
             return \App\Models\Category::find($category_id)->title;
         });
@@ -44,8 +44,12 @@ class ArticleController extends AdminController
         $grid->column('downlink', __('下载链接'));
         $grid->column('downpassword', __('提取码'));
         $grid->column('content', __('Content'));
-        $grid->column('hits', __('点击数'));
-        $grid->column('downtimes', __('下载次数'));
+        $grid->column('hits', __('点击数'))->sortable()->totalRow(function($downtimes){
+            return "<span class='text-primary text-bold'><i class='fa fa-clipboard'></i> {$downtimes} 次</span>";
+        });
+        $grid->column('downtimes', __('下载次数'))->sortable()->totalRow(function($downtimes){
+            return "<span class='text-primary text-bold'><i class='fa fa-arrow-circle-o-down'></i> {$downtimes} 次</span>";
+        });
         // $grid->column('manager_id', __('Manager id'));
         $grid->column('tags', __('tags'))->display(function ($tags) {
             // 如果标签为空
@@ -162,7 +166,7 @@ class ArticleController extends AdminController
 
         // $form->number('category_id', __('Category id'));
         // 获取栏目列表
-        $form->select('category_id',__('所属栏目'))->options('/admin/api/categories');
+        $form->select('category_id',__('所属栏目'))->options('/'.env('ADMIN_ROUTE_PREFIX').'/api/categories');
         // 联动
         // $form->select('category_id',__('所属栏目'))->options('/admin/api/categories')->load('needcoin', '/admin/api/getCategoryNeedcoin');
 
@@ -178,7 +182,7 @@ class ArticleController extends AdminController
         $form->number('needcoin', __('所需积分'))->default(1);
         $form->multipleSelect('tags')->options(Tag::all()->pluck('title', 'id'));
         // 获取用户角色列表
-        $form->select('userrole_id',__('文章用户角色'))->options('/admin/api/userroles');
+        $form->select('userrole_id',__('文章用户角色'))->options('/'.env('ADMIN_ROUTE_PREFIX').'/api/userroles');
         return $form;
     }
 

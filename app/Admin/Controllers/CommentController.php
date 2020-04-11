@@ -85,7 +85,7 @@ class CommentController extends AdminController
     {
         $form = new Form(new Comment());
 
-        $form->select('user_id', __('User id'))->options('/admin/api/getusers');
+        $form->select('user_id', __('User id'))->options('/'.env('ADMIN_ROUTE_PREFIX').'/api/getusers');
         $form->number('article_id', __('Article id'));
         $form->textarea('content', __('Content'));
         $form->switch('status', __('Status'));

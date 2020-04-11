@@ -37,7 +37,7 @@ select					{ font: 9pt Tahoma, Verdana; font-weight: normal; }
 <table align="center" width="100%">
   <tbody><tr> 
     <td height="32" align="center"><font size="6">{{$article->title}}</font>
-  @if($usecoin)
+  @if(!empty($usecoin))
     <a target="_blank" href="{{url('member/downokusecoin'.'/'.$article->id)}}" title="{{$article->title}}">
       <br><br><br>
     <img src="{{asset('images/xiazai.png')}}" border="0">

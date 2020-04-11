@@ -38,6 +38,7 @@ class MessageController extends AdminController
         $grid->column('updated_at', __('Updated at'));
         
         $grid->model()->orderBy('id', 'desc');
+        $grid->quickSearch('to_uid');
 
         return $grid;
     }
@@ -79,7 +80,7 @@ class MessageController extends AdminController
         $form->editor('content', __('Content'));
         $form->text('from_uid', __('发消息人 '))->default('sys_manager_'.\Admin::user()->id);
 
-        // $form->select('to_uid', __('发消息给'))->options('/admin/api/getusers');
+        // $form->select('to_uid', __('发消息给'))->options('/'.env('ADMIN_ROUTE_PREFIX').'/api/getusers');
         $form->multipleSelect('to_uid')->options(function(){
             return \App\Models\User::all()->pluck('username', 'id');
         });

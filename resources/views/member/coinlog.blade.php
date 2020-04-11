@@ -12,6 +12,9 @@
         <th style="width:80px">时间</th>
         <th>内容</th>
         <th style="width:50px">积分变动</th>
+        <th style="width:50px">
+          积分余额
+        </th>
         </tr>
         </thead>
         <tbody>
@@ -21,11 +24,12 @@
             <td>{{subtext($u->created_at,16,'')}}</td>
             <td>{!!$u->content!!}</td>
             <td>{{$u->coinlog}}</td>
+            <td>{{$u->coinlogafter}}</td>
         </tr>
         @endforeach
         @else
           <tr>
-            <td colspan="4">暂无充值记录</td>
+            <td colspan="4">暂无记录</td>
           </tr>
         @endif
         </tbody>

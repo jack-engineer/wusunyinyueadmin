@@ -30,16 +30,13 @@ class UserQiantaiController extends AdminController
     {
         $grid = new Grid(new User());
 
-        $grid->column('id', __('Id'));
+        $grid->column('id', __('Id'))->sortable();
         // $grid->column('parent_id', __('Parent id'));
         $grid->column('username', __('Username'));
         $grid->column('password', __('Password'));
         $grid->column('email', __('Email'));
         $grid->column('name', __('Name'));
-        $grid->column('qq', __('Qq'));
-        $grid->column('wechat', __('Wechat'));
-        $grid->column('phone', __('Phone'));
-        $grid->column('coin', __('Coin'));
+        $grid->column('coin', __('Coin'))->sortable();
         $grid->column('userrole_id',__('用户组'))->display(function($userrole_id){
             if($userrole_id){
                 return \App\Models\Userrole::find($userrole_id)->title;
@@ -53,6 +50,9 @@ class UserQiantaiController extends AdminController
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
         $grid->column('expiration_date', __('Expiration date'))->date('Y-m-d');
+        $grid->column('qq', __('Qq'));
+        $grid->column('wechat', __('Wechat'));
+        $grid->column('phone', __('Phone'));
 
         $grid->model()->orderBy('id', 'desc');
         
@@ -142,7 +142,7 @@ class UserQiantaiController extends AdminController
         $form->text('wechat', __('Wechat'));
         $form->mobile('phone', __('Phone'));
         $form->number('coin', __('Coin'));
-        $form->select('userrole_id',__('用户组'))->options('/admin/api/getuserroles');
+        $form->select('userrole_id',__('用户组'))->options('/'.env('ADMIN_ROUTE_PREFIX').'/api/getuserroles');
         $form->editor('remark', __('Remark'));
         $form->text('path', __('Path'));
         $form->date('expiration_date', __('Expiration date'))->default(date('Y-m-d'));

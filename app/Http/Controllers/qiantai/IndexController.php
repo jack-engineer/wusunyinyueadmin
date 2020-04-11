@@ -69,8 +69,8 @@ class IndexController extends Controller
                 $userinfo->loginip = $ip;
                 $userinfo->save();
             }
-
-            $getMessage = Message::where("to_uid",Auth()->user()->id)->where('status','===','0')->whereNull("deleted_at")->orderBy('id', 'desc')->paginate(30);
+            // 只判断是否有专门针对该用户的消息
+            $getMessage = Message::where("to_uid",Auth()->user()->id)->where('status','!=',1)->whereNull("deleted_at")->orderBy('id', 'desc')->paginate(30);
             // 判断是否有未读消息
             if(count($getMessage)>0){
                 $this->xiaoxi = true;
@@ -78,7 +78,8 @@ class IndexController extends Controller
             if($this->xiaoxi){
                 return redirect(base64_decode($url))->withCookie('xiaoxi',$this->xiaoxi);
             }else{
-                return redirect(base64_decode($url));
+                $cookie = Cookie::forget('xiaoxi');
+                return redirect(base64_decode($url))->cookie($cookie);  
             }
         }else {
             $errors[]='抱歉，您输入的账户或密码有误！';
@@ -110,15 +111,17 @@ class IndexController extends Controller
 
         $user = new User;
         $user->username = $username;
+        $user->userrole_id=1;
         $user->password = Hash::make($password);
         $user->email = $email;
         $user->parent_id=0;
+        $user->coin=0;
         $user->created_at = $user->updated_at = Carbon::now();
-        $user->expiration_date = Carbon::now()->addYears(100);
+        $user->expiration_date = null;
        
         if ($user->save()) {
             $id = $user->id;
-            $this->sendMessage($id);
+            // $this->sendMessage($id);
             session()->flash('success','创建成功');
             return redirect()->route('userlogin');
         }else {
@@ -132,7 +135,7 @@ class IndexController extends Controller
         $message->title = configs('注册后站内信标题')?:'欢迎加入无损音乐网站';
         $message->content = configs('注册后站内信内容')?:'欢迎加入无损音乐网站';
         $message->from_uid = 'sys_manager'; //系统发的信息，sys_manager_id
-        $message->to_uid = $id;
+        $message->to_uid = array($id);
         $message->type = 'sys'; //用户发的，类型是user,系统发的是sys
         $message->status = 0;
         return $message->save();

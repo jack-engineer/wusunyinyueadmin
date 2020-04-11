@@ -70,7 +70,7 @@ class WeixinconfigController extends AdminController
         $form->column(2/3, function ($form) {
 
             
-            $form->select('weixin_id', __('Weixin id'))->options('/admin/api/getweixins')->width(2);
+            $form->select('weixin_id', __('Weixin id'))->options('/'.env('ADMIN_ROUTE_PREFIX').'/api/getweixins')->width(2);
             $form->text('welcometext', __('Welcometext'));
             $form->editor('defaulttext', __('Defaulttext'));
             $form->number('returnnum', __('Returnnum'))->default(3);

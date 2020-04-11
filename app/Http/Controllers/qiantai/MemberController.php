@@ -5,7 +5,8 @@ namespace App\Http\Controllers\qiantai;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Message;
-use App\Models\UserOrder;
+use App\Models\Messagetemplate;
+use App\Models\Userorder;
 use App\Models\Article;
 use App\Models\Usercoinlog;
 use Illuminate\Support\Facades\Hash;
@@ -114,7 +115,7 @@ class MemberController extends Controller
     public function buylist()
     {
         $user = Auth::guard('web')->user();
-        $userorder = UserOrder::where('user_id',"=",$user->id)->whereNull('deleted_at')->orderBy('id','desc')->paginate(10);
+        $userorder = Userorder::where('user_id',"=",$user->id)->whereNull('deleted_at')->orderBy('id','desc')->paginate(10);
         // dd($userorder);
         return view('member.buylist',['user'=>$this->user,'userorder'=>$userorder ]);
     }
@@ -130,33 +131,58 @@ class MemberController extends Controller
     {
         $message = new Message();
         if (request()->isMethod('get'))  {
-            $getMessage = Message::where("to_uid",Auth::guard('web')->id())->whereNull("deleted_at")->orderBy('id', 'desc')->paginate(30);
-            return view('member.msg', ['getMessage' => $getMessage,  'message'=>$message]);
+            $userid = Auth::guard('web')->id();
+
+            $msg = Message::all();
+            // 查找需要显示的消息列表
+            $needshowlist = [];
+            foreach($msg as $m){
+                if(!stripos($m->to_uid,',')){
+                    if($m->to_uid == $userid){
+                        $needshowlist[]=$m->id;
+                        // 改变该消息的状态
+                        DB::table('messages')->where('id',$m->id)->update(['status'=>1]);
+                    }
+                }else{
+                    $arr = explode(',',$m->to_uid);
+                    if(!empty(array_search($userid,$arr))){
+                        $needshowlist[]=$m->id;
+                    }
+                }
+            }
+            // dd($needshowlist);
+            // 查出需要显示的消息列表
+            $cookie = Cookie::forget('xiaoxi');
+            $getMessage = Message::whereIn("id",$needshowlist)->orderBy('id', 'desc')->paginate(30);
+            // 消息模板
+            $messagetemplate = Messagetemplate::find(5);
+            // dd($messagetemplate);
+            return response()->view('member.msg', ['getMessage' => $getMessage,  'messagetemplate'=>$messagetemplate])->cookie($cookie);
         }
         return view('member.msg');
     }
 
-    public function del($id){
-        $b = Message::where("to_uid",Auth::guard('web')->id())->where('id',$id)->first();
+    // public function del($id){
+    //     $b = Message::where("to_uid",Auth::guard('web')->id())->where('id',$id)->first();
         
-        if(!empty($b) && $b->delete()){
-            return back()->with('message','删除成功！');
-        }else{
-            abort(404);
-        }
-    }
+    //     if(!empty($b) && $b->delete()){
+    //         return back()->with('message','删除成功！');
+    //     }else{
+    //         abort(404);
+    //     }
+    // }
 
-    public function read($id)
-    {
-        $b = Message::where("to_uid",Auth::guard('web')->id())->where('id',$id)->first();
-        if(!empty($b) && $b->where('id',$id)->update(['status'=>1])){
-            $cookie = Cookie::forget('xiaoxi');
-            // dd($cookie);
-            return back()->with('message','设置成功！')->cookie($cookie);
-        }else{
-            abort(404);
-        }
-    }
+    // public function read($id)
+    // {
+    //     $b = Message::where("to_uid",Auth::guard('web')->id())->where('id',$id)->first();
+    //     if(!empty($b) && $b->where('id',$id)->update(['status'=>1])){
+    //         $cookie = Cookie::forget('xiaoxi');
+    //         // dd($cookie);
+    //         return back()->with('message','设置成功！')->cookie($cookie);
+    //     }else{
+    //         abort(404);
+    //     }
+    // }
 
     
 

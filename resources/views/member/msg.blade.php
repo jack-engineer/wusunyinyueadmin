@@ -23,7 +23,7 @@
                         <tr>
                             <th class="" style="width:120px">消息标题</th>
                             <th class=""style="text-align:left">内容</th>
-                            <th style="width:120px">状态</th>
+                            <th style="width:120px">时间</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -34,15 +34,22 @@
                                 <td class="row" style="text-align:left">{!!$m->content!!}</td>
                                 <td class="left" >
                                 {{subtext($m->created_at,16,'')}} <br>
-                                    @if($m->status)
+                                    {{-- @if($m->status)
                                         <span class="label label-success" style="color:green">已读</span>
                                     @else
                                         <span class="label label-danger" style="color:red">未读</span>
-                                    @endif<a href="{{url('member/msg/del/'.$m->id)}}" style="color:red" onclick="return confirm('确认要删除?');">删除</a>
-                                <a href="{{url('member/msg/read/'.$m->id)}}" style="color:black" onclick="return confirm('确认已读?');">设置已读</a>
+                                    @endif<a href="{{url('member/msg/del/'.$m->id)}}" style="color:red" onclick="return confirm('确认要删除?');">删除</a>  --}}
+                                 {{-- <a href="{{url('member/msg/read/'.$m->id)}}" style="color:black" onclick="return confirm('确认已读?');">设置已读</a> --}}
                                 </td>
                             </tr>
                         @endforeach
+                        <tr style="border-bottom:1px solid ">
+                            <td class="left">{!!$messagetemplate->title!!}</td>
+                            <td class="row" style="text-align:left">{!!$messagetemplate->content!!}</td>
+                            <td class="left" >
+                            {{subtext($messagetemplate->created_at,16,'')}} <br>
+                            </td>
+                        </tr>
                         @else
                         <tr>
                             <div class="tips" style="position:relative; padding-left:30px;"><i class="icon icon-1"></i>        暂时没有未读的消息!	  </div>
