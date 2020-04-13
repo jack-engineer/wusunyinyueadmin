@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Encore\Admin\Traits\DefaultDatetimeFormat;
 
-class Auto_replay extends Model
+class Autoreplay extends Model
 {
     //
     use SoftDeletes;

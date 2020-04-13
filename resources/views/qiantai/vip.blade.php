@@ -7,7 +7,7 @@
 <div class="info bgb mb15">
 <h2 class="place ybbt1"><i class="fa fa-home"></i> <a href="{{url('/')}}">首页</a>&nbsp;&gt;&nbsp; 正文</h2>
 <div class="info-bt"> 
-<h1 class="title">高品质无损音乐下载会员自助开通</h1>
+<h1 class="title">积分充值和本站会员介绍</h1>
 <small><!--<span><i class="fa fa-user"></i> juzi</span>--><span><i class="fa fa-clock-o"></i> 2019-08-18 17:09:37 </span><span><i class="fa fa-eye"></i> 149400</span></small>
 </div>
 <link rel="stylesheet" rev="stylesheet" href="{{asset('css/vipcss.css')}}" type="text/css">
@@ -15,7 +15,7 @@
 <style type="text/css">
 
 </style>
-<p>无损音乐下载不是网红，没有妖娆的舞姿和才艺，但是我们有一个无私的心。因网络运营成本需要，为了我们共同的喜好和对无损品质的追求，如果您对我们比较认可，有条件的朋友支持一下我们的发展，我们竭力搜集分享更多的无损音乐。&nbsp;<span style="font-size: 0.9rem;">&nbsp;</span></p>
+<p>积分说明：1元=10积分，最低1元起充。充值积分或开通会员请联系本站工作人员微信：{{configs('官方微信')}}  QQ:{{configs('客服QQ')}}。&nbsp;<span style="font-size: 0.9rem;">&nbsp;<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin={{configs('客服QQ')}}&amp;site=qq&amp;menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:372009617:51" alt="点击这里给我发消息" title="点击这里给我发消息"></a></span></p>
 <div class="t-c vip-box" style="font-size: 14.4px;">
 <div class="be-vip pd20 vip-item" style="background-image: linear-gradient(-226deg, rgb(31, 173, 29) 0%, rgb(52, 154, 54) 100%);">
 <div class="vip-name">青铜会员</div>

@@ -29,7 +29,7 @@
         </div>
 		<div class="tab-pal" style="display: none;">
             <ul>
-            <li><span class="fr zuo10"></span><a href="{{url('vip')}}" title="高品质无损音乐下载会员自助开通" class="yanse"><font color="red">高品质无损音乐下载会员自助开通</font></a></li>
+            <li><span class="fr zuo10"></span><a href="{{url('vip')}}" title="高品质无损音乐下载会员自助开通" class="yanse"><font color="red">积分充值和本站会员介绍</font></a></li>
             @if(count(getPages('id','desc',7))>0)
             @foreach(getPages('id','desc',7) as $g)
                         <li><span class="fr zuo10"></span><a href="{{url('page_'.$g->id.'.html')}}" title="{{$g->title}}" class="yanse">{{$g->title}}</a></li>

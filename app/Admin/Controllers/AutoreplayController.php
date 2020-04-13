@@ -2,20 +2,20 @@
 
 namespace App\Admin\Controllers;
 
-use App\Models\Auto_replay;
+use App\Models\Autoreplay;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 
-class Autoreplays extends AdminController
+class AutoreplayController extends AdminController
 {
     /**
      * Title for current resource.
      *
      * @var string
      */
-    protected $title = 'App\Models\Auto_replay';
+    protected $title = 'App\Models\Autoreplay';
 
     /**
      * Make a grid builder.
@@ -24,7 +24,7 @@ class Autoreplays extends AdminController
      */
     protected function grid()
     {
-        $grid = new Grid(new Auto_replay());
+        $grid = new Grid(new Autoreplay());
 
         $grid->column('id', __('Id'));
         $grid->column('weixin_id', __('Weixin id'));
@@ -45,7 +45,7 @@ class Autoreplays extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(Auto_replay::findOrFail($id));
+        $show = new Show(Autoreplay::findOrFail($id));
 
         $show->field('id', __('Id'));
         $show->field('weixin_id', __('Weixin id'));
@@ -65,9 +65,9 @@ class Autoreplays extends AdminController
      */
     protected function form()
     {
-        $form = new Form(new Auto_replay());
+        $form = new Form(new Autoreplay());
 
-        $form->number('weixin_id', __('Weixin id'));
+        $form->select('weixin_id', __('Weixin id'))->options('/'.env('ADMIN_ROUTE_PREFIX').'/api/getweixins');
         $form->text('keyword', __('Keyword'));
         $form->textarea('content', __('Content'));
 
