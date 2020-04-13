@@ -46,6 +46,19 @@ class UsercoinlogController extends AdminController
             // 去掉查看
             // $actions->disableView();
         });
+        
+        // 增加输入用户名快速搜索的功能。
+        $grid->quickSearch(function ($model, $query) {
+            $user = new User();
+            $userid = $user->select('id')->where('username','like',"%{$query}%")->get()->toArray();
+            $useridarr = [];
+            foreach($userid as $item){
+                $useridarr=array_merge($useridarr,array_values($item));
+            }
+            // dd($useridarr);
+            $model->whereIn('user_id', $useridarr);
+            // $model->where('title', $query)->orWhere('desc', 'like', "%{$query}%");
+        });
 
         return $grid;
     }

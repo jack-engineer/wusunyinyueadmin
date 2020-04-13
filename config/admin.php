@@ -292,6 +292,9 @@ return [
     */
     'layout' => ['sidebar-mini', 'sidebar-collapse'],
 
+    // 是否显示footer
+    'show_footer' => false,
+
     /*
     |--------------------------------------------------------------------------
     | Login page background image
