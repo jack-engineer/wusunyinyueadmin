@@ -110,7 +110,7 @@ class UserorderController extends AdminController
         $form->radio('order_type', __('支付方式'))->options(['支付宝'=>'支付宝','微信'=>'微信'])->default('微信');
         $form->decimal('money', __('金额'))->default(100);
         $form->date('expiration_date', __('过期时间'))->default(date('Y-m-d'));
-        $form->select('userrole_id',__('用户组'))->options('/adm'.env('ADMIN_ROUTE_PREFIX').'in/api/getuserroles');
+        $form->select('userrole_id',__('用户组'))->options('/'.env('ADMIN_ROUTE_PREFIX').'/api/getuserroles');
         //保存后回调
         $form->saved(function (Form $form) {
             $user = User::find($form->model()->user_id);

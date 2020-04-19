@@ -21,7 +21,7 @@
         </div>
         <div class="jfz fl">
         <strong><a href="{{url('member/coinlog')}}"><font color="red">我的积分：{{Auth::guard('web')->user()->coin}}</font></a></strong><br>
-        <strong><a href="{{url('buygroup')}}"><font color="red">升级会员</font></a></strong><br>
+        <strong><a href="{{url('member/buygroup')}}"><font color="red">升级会员</font></a></strong><br>
         尊享真正的无损音乐！<br>
         高品质，高保真！ <br>
 

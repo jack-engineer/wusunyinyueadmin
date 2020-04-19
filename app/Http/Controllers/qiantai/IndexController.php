@@ -19,6 +19,8 @@ use Carbon\Carbon;
 use Auth;
 
 use App\Models\Message;
+use App\Models\Usercoinlog;
+
 class IndexController extends Controller
 {
     public $menus;
@@ -115,14 +117,26 @@ class IndexController extends Controller
         $user->password = Hash::make($password);
         $user->email = $email;
         $user->parent_id=0;
-        $user->coin=0;
+        if(configs('注册会员是否送积分')){
+            $user->coin=configs('送几分积分');//新注册会员，送10积分
+        }else{
+            $user->coin=0;
+        }
         $user->created_at = $user->updated_at = Carbon::now();
         $user->expiration_date = null;
        
         if ($user->save()) {
             $id = $user->id;
             // $this->sendMessage($id);
-            session()->flash('success','创建成功');
+            if(configs('注册会员是否送积分')){
+                $usercoinlog = new Usercoinlog();
+                $usercoinlog->user_id = $id;
+                $usercoinlog->content = "注册送".configs('送几分积分')."积分";
+                $usercoinlog->coinlog = configs('送几分积分');
+                $usercoinlog->coinlogafter = configs('送几分积分');
+                $usercoinlog->save();
+            }
+                session()->flash('success','创建成功');
             return redirect()->route('userlogin');
         }else {
             return back()->with("message","创建失败");
@@ -236,13 +250,13 @@ class IndexController extends Controller
     }
 
     // 
-    // public function tags($tag){
-    //     $articles = Article::where(function ($query) use ($tag) {
-    //         $query->where('title', 'like', "%{$tag}%")->orWhere('author', 'like', "%{$tag}%");
-    //     })->orderBy('hits','desc')->paginate(10);
-    //     // $articles = Article::where('title', 'like', '%' . $tag . '%')->orWhere('content', 'like', '%' . $tag . '%')->orderBy('hits', 'desc')->paginate(15);
-    //     return view('qiantai/tags',['articles'=>$articles,'tag'=>$tag]);
-    // }
+    public function tags($tag){
+        $articles = Article::where(function ($query) use ($tag) {
+            $query->where('title', 'like', "%{$tag}%")->orWhere('author', 'like', "%{$tag}%");
+        })->orderBy('hits','desc')->paginate(10);
+        // $articles = Article::where('title', 'like', '%' . $tag . '%')->orWhere('content', 'like', '%' . $tag . '%')->orderBy('hits', 'desc')->paginate(15);
+        return view('qiantai/tags',['articles'=>$articles,'tag'=>$tag]);
+    }
 
     public function guestbook(){
         // 精彩留言

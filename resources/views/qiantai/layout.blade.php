@@ -102,6 +102,7 @@ class="on"
 <div class="zh">
 <p>Copyright © <a href="{{url('/')}}">无损音乐下载</a>   </p>
 <a href="{{url('/')}}">歌手大全</a> | <a href="{{url('/')}}">sitemap</a> | <span id="cnzz_stat_icon_1278243445"><a href="#" target="_self" title="站长统计">站长统计</a> | <a href="{{url('member')}}">会员中心</a></span>
+<p>本站音乐来源网络及收藏，服务器不存储任何音乐文件，无意侵犯您的版权，仅供会员交流学习！<br>版权归发行方所有，如若任何人声称是任何音乐的版权所有人,请联系1074210269@qq.com,本站会尽快删除！</p>
 </div>
 </div>
 <!-- 回到顶部 -->

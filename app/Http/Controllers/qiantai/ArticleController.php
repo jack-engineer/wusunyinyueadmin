@@ -91,9 +91,18 @@ class ArticleController extends Controller
     }
 
     // 真正的下载页面
+    // 增加了下载记录
     public function downok($id){
         $article = Article::findorFail($id);
         if(Auth::guard('web')->check() && $this->kanwenzhang(Auth::guard('web')->user(),$article)){
+            // 添加下载记录
+            $usercoinlog = new Usercoinlog();
+            $usercoinlog->user_id=Auth::guard('web')->id();
+            $usercoinlog->content = "歌曲ID:".$article->id."<br>歌曲名称:".$article->title."<br>".'链接：'.$article->downlink."<br>密码：".$article->downpassword."<br>";
+            $usercoinlog->coinlog = 0;
+            $usercoinlog->coinlogafter = Auth::guard('web')->user()->coin ;
+            $usercoinlog->save();
+
             $article->increment('downtimes');
             return redirect($article->downlink);
         }
@@ -108,7 +117,7 @@ class ArticleController extends Controller
             // 记录积分
             $usercoinlog = new Usercoinlog();
             $usercoinlog->user_id=Auth::guard('web')->id();
-            $usercoinlog->content = "歌曲名称:".$article->title."<br>".'链接：'.$article->downlink."<br>密码：".$article->downpassword."<br>";
+            $usercoinlog->content = "歌曲ID:".$article->id."<br>歌曲名称:".$article->title."<br>".'链接：'.$article->downlink."<br>密码：".$article->downpassword."<br>";
             $usercoinlog->coinlog -= $article->needcoin;
             $usercoinlog->coinlogafter = Auth::guard('web')->user()->coin - $article->needcoin;
             $usercoinlog->save();

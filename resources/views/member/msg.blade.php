@@ -43,6 +43,7 @@
                                 </td>
                             </tr>
                         @endforeach
+                        @else
                         <tr style="border-bottom:1px solid ">
                             <td class="left">{!!$messagetemplate->title!!}</td>
                             <td class="row" style="text-align:left">{!!$messagetemplate->content!!}</td>
@@ -50,7 +51,6 @@
                             {{subtext($messagetemplate->created_at,16,'')}} <br>
                             </td>
                         </tr>
-                        @else
                         <tr>
                             <div class="tips" style="position:relative; padding-left:30px;"><i class="icon icon-1"></i>        暂时没有未读的消息!	  </div>
                         </tr>

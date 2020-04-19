@@ -13,9 +13,10 @@ use Illuminate\Routing\Router;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/home','qiantai\IndexController@index');
 
 Route::any('weixin/{id?}','WeixinController@index');
 
@@ -92,7 +93,7 @@ Route::group([
     });
     // 获取用户角色列表api
     Route::get('api/getuserroles',function(){
-        $arr = App\Models\userrole::all()->toArray();
+        $arr = App\Models\Userrole::all()->toArray();
         $res = [];
         foreach($arr as $k=>$v){
             $res[$k]['id']=$v['id'];
