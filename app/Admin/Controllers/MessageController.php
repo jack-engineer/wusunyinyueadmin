@@ -39,7 +39,9 @@ class MessageController extends AdminController
         
         $grid->model()->orderBy('id', 'desc');
         $grid->quickSearch('to_uid');
-
+        if (!\Admin::user()->can('显示导出数据')) {
+            $grid->disableExport();
+        }
         return $grid;
     }
 

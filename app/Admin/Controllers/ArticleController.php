@@ -11,7 +11,7 @@ use App\Models\Tag;
 use App\Models\Admin;
 use Encore\Admin\Layout\Content;
 use Illuminate\Support\Facades\DB;
-
+use Encore\Admin\Auth\Permission;
 use Illuminate\Http\Request;
 
 class ArticleController extends AdminController
@@ -34,7 +34,6 @@ class ArticleController extends AdminController
     protected function grid()
     {
         $grid = new Grid(new Article());
-
         $grid->column('id', __('Id'))->sortable()->totalRow('合计');
         $grid->column('category_id', __('所属栏目'))->display(function($category_id){
             return \App\Models\Category::find($category_id)->title;
@@ -107,6 +106,38 @@ class ArticleController extends AdminController
             13 => "稀有音乐",
           ]);
         });
+        $grid->quickSearch('title','author','id');
+        if (!\Admin::user()->can('显示导出数据')) {
+            $grid->disableExport();//去掉导出数据
+            $grid->disableBatchActions();// 去掉批量操作
+            $grid->disableActions();  //禁止行级右侧的所有操作按钮
+            // $grid->disableCreateButton(); //禁止新建按钮
+            // $grid->disableRowSelector();  //进行行选择按钮
+            // $grid->disableTools();  //禁止工具栏
+            // $grid->disablePagination(); //禁止分页
+            
+        }
+        
+
+        // $grid->export(function ($export) {
+            
+
+        //     // 导出的文件名
+        //     // $export->filename('Filename.csv');
+        
+        //     // 除了的字段
+        //     // $export->except(['column1', 'column2' ...]);
+        
+        //     // 只导出的字段
+        //     $export->only(['id']);
+        
+        //     // 导出原始数据
+        //     // $export->originalValue(['column1', 'column2' ...]);
+        //     // 自定义导出的内容
+        //     // $export->column('column_5', function ($value, $original) {
+        //     //     return $value;
+        //     // )};
+        // });
 
 
         return $grid;

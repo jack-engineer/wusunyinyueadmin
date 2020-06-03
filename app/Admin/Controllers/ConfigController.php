@@ -39,7 +39,9 @@ class ConfigController extends AdminController
         $grid->column('updated_at', __('Updated at'));
 
         $grid->model()->orderBy('id','desc');
-
+        if (!\Admin::user()->can('显示导出数据')) {
+            $grid->disableExport();
+        }
         return $grid;
     }
 

@@ -34,7 +34,9 @@ class CategoryController extends AdminController
         // $grid->column('deleted_at', __('Deleted at'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
-
+        if (!\Admin::user()->can('显示导出数据')) {
+            $grid->disableExport();
+        }
         return $grid;
     }
 

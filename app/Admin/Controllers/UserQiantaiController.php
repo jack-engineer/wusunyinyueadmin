@@ -57,6 +57,9 @@ class UserQiantaiController extends AdminController
         $grid->model()->orderBy('id', 'desc');
         
         $grid->quickSearch('username','email','name');
+        if (!\Admin::user()->can('显示导出数据')) {
+            $grid->disableExport();
+        }
         $grid->actions(function ($actions) {
 
             // 去掉删除

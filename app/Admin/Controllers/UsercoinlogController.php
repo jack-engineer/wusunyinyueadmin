@@ -60,7 +60,9 @@ class UsercoinlogController extends AdminController
             $model->orWhere('content','like', "%{$query}%");
         });
         // $grid->quickSearch('title','content','id');
-
+        if (!\Admin::user()->can('显示导出数据')) {
+            $grid->disableExport();
+        }
         return $grid;
     }
 

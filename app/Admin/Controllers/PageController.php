@@ -33,7 +33,16 @@ class PageController extends AdminController
         $grid->column('deleted_at', __('admin.Deleted at'));
         $grid->column('created_at', __('admin.Created at'));
         $grid->column('updated_at', __('admin.Updated at'));
-
+        if (!\Admin::user()->can('显示导出数据')) {
+            $grid->disableExport();//去掉导出数据
+            // $grid->disableBatchActions();// 去掉批量操作
+            // $grid->disableActions();  //禁止行级右侧的所有操作按钮
+            // $grid->disableCreateButton(); //禁止新建按钮
+            // $grid->disableRowSelector();  //进行行选择按钮
+            // $grid->disableTools();  //禁止工具栏
+            // $grid->disablePagination(); //禁止分页
+            
+        }
         return $grid;
     }
 

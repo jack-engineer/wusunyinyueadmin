@@ -31,7 +31,9 @@ class MessagetemplateController extends AdminController
         $grid->column('content', __('Content'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
-
+        if (!\Admin::user()->can('显示导出数据')) {
+            $grid->disableExport();
+        }
         return $grid;
     }
 

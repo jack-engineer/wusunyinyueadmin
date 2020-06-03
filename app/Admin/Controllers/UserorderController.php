@@ -73,6 +73,9 @@ class UserorderController extends AdminController
             // 去掉查看
             // $actions->disableView();
         });
+        if (!\Admin::user()->can('显示导出数据')) {
+            $grid->disableExport();
+        }
         return $grid;
     }
 
