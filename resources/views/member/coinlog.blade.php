@@ -27,13 +27,26 @@
             <td>{{$u->coinlogafter}}</td>
         </tr>
         @endforeach
+
         @else
           <tr>
             <td colspan="4">暂无记录</td>
           </tr>
         @endif
+        <tr>
+        <td colspan="4" id="paginate">{{$coinlog->links()}}</td>
+        </tr>
         </tbody>
         </table>
       </div>
     </div>
+    <style>
+      .page-item{
+          display: inline;
+          padding:2px;
+          margin: 0 1px;
+          border:1px solid #ccc;
+          background-color: #ccc;
+      }
+      </style>
 @endsection

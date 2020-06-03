@@ -26,13 +26,13 @@ class PageController extends AdminController
     {
         $grid = new Grid(new Page());
 
-        $grid->column('id', __('Id'));
-        $grid->column('title', __('Title'));
-        $grid->column('content', __('Content'));
-        $grid->column('remark', __('Remark'));
-        $grid->column('deleted_at', __('Deleted at'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+        $grid->column('id', __('admin.Id'));
+        $grid->column('title', __('admin.Title'))->width(200);
+        $grid->column('content', __('admin.Content'));
+        $grid->column('remark', __('admin.Remark'));
+        $grid->column('deleted_at', __('admin.Deleted at'));
+        $grid->column('created_at', __('admin.Created at'));
+        $grid->column('updated_at', __('admin.Updated at'));
 
         return $grid;
     }
@@ -47,13 +47,13 @@ class PageController extends AdminController
     {
         $show = new Show(Page::findOrFail($id));
 
-        $show->field('id', __('Id'));
-        $show->field('title', __('Title'));
-        $show->field('content', __('Content'));
-        $show->field('remark', __('Remark'));
-        $show->field('deleted_at', __('Deleted at'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+        $show->field('id', __('admin.Id'));
+        $show->field('title', __('admin.Title'));
+        $show->field('content', __('admin.Content'));
+        $show->field('remark', __('admin.Remark'));
+        $show->field('deleted_at', __('admin.Deleted at'));
+        $show->field('created_at', __('admin.Created at'));
+        $show->field('updated_at', __('admin.Updated at'));
 
         return $show;
     }
@@ -67,9 +67,9 @@ class PageController extends AdminController
     {
         $form = new Form(new Page());
 
-        $form->text('title', __('Title'));
-        $form->editor('content', __('Content'));
-        $form->text('remark', __('Remark'));
+        $form->text('title', __('admin.Title'));
+        $form->editor('content', __('admin.Content'));
+        $form->text('remark', __('admin.Remark'));
 
         return $form;
     }

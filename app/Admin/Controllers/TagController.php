@@ -26,13 +26,13 @@ class TagController extends AdminController
     {
         $grid = new Grid(new Tag());
 
-        $grid->column('id', __('Id'));
-        $grid->column('title', __('Title'));
-        $grid->column('english', __('English'));
-        $grid->column('counts', __('Counts'));
+        $grid->column('id', __('admin.Id'));
+        $grid->column('title', __('admin.Title'));
+        $grid->column('english', __('admin.English'));
+        $grid->column('counts', __('admin.Counts'));
         // $grid->column('deleted_at', __('Deleted at'));
-        $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
+        $grid->column('created_at', __('admin.Created at'));
+        $grid->column('updated_at', __('admin.Updated at'));
 
         return $grid;
     }
@@ -47,13 +47,13 @@ class TagController extends AdminController
     {
         $show = new Show(Tag::findOrFail($id));
 
-        $show->field('id', __('Id'));
-        $show->field('title', __('Title'));
-        $show->field('english', __('English'));
-        $show->field('counts', __('Counts'));
-        $show->field('deleted_at', __('Deleted at'));
-        $show->field('created_at', __('Created at'));
-        $show->field('updated_at', __('Updated at'));
+        $show->field('id', __('admin.Id'));
+        $show->field('title', __('admin.Title'));
+        $show->field('english', __('admin.English'));
+        $show->field('counts', __('admin.Counts'));
+        $show->field('deleted_at', __('admin.Deleted at'));
+        $show->field('created_at', __('admin.Created at'));
+        $show->field('updated_at', __('admin.Updated at'));
 
         return $show;
     }
@@ -67,9 +67,9 @@ class TagController extends AdminController
     {
         $form = new Form(new Tag());
 
-        $form->text('title', __('Title'));
-        $form->text('english', __('English'));
-        $form->number('counts', __('Counts'));
+        $form->text('title', __('admin.Title'));
+        $form->text('english', __('admin.English'));
+        $form->number('counts', __('admin.Counts'));
 
         return $form;
     }

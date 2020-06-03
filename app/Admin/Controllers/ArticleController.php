@@ -8,6 +8,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use App\Models\Tag;
+use App\Models\Admin;
 use Encore\Admin\Layout\Content;
 use Illuminate\Support\Facades\DB;
 
@@ -75,7 +76,7 @@ class ArticleController extends AdminController
         // $grid->column('created_at', __('Created at'));
         // $grid->column('updated_at', __('Updated at'));
         $grid->model()->orderBy('id','desc');
-        $grid->quickSearch('title','author','id');
+            
 
         $grid->filter(function($filter){
 
@@ -178,7 +179,7 @@ class ArticleController extends AdminController
         
         $form->number('hits', __('点击次数'))->default(1);
         $form->number('downtimes', __('下载次数'))->default(1);
-        $form->text('manager_id', __('管理员id'))->default(\Admin::user()->id)->readonly();
+        $form->text('manager_id', __('管理员id'))->default(Admin::user()->id)->readonly();
         $form->number('needcoin', __('所需积分'))->default(1);
         $form->multipleSelect('tags')->options(Tag::all()->pluck('title', 'id'));
         // 获取用户角色列表

@@ -57,8 +57,9 @@ class UsercoinlogController extends AdminController
             }
             // dd($useridarr);
             $model->whereIn('user_id', $useridarr);
-            // $model->where('title', $query)->orWhere('desc', 'like', "%{$query}%");
+            $model->orWhere('content','like', "%{$query}%");
         });
+        // $grid->quickSearch('title','content','id');
 
         return $grid;
     }

@@ -8,7 +8,7 @@ use EasyWeChat\Factory;
 use App\Models\Weixin;
 use App\Models\Weixinconfig;
 use App\Models\Article;
-use App\Models\Auto_replay;
+use App\Models\Autoreplay;
 
 class WeixinController extends Controller
 {
@@ -88,7 +88,7 @@ class WeixinController extends Controller
 		// 根据用户的输入，提供相应的服务，搜索歌曲，返回给用户。
     public function search($keyword,$num){
 
-        $replay = $this->Auto_replay($keyword);
+        $replay = $this->auto_replay($keyword);
         if(!empty($replay)){
             $replay.="\n".$this->laststr;
             return $replay;
@@ -108,29 +108,10 @@ class WeixinController extends Controller
         return $mess;
     }
 
-    public function Auto_replay($keyword){
+    public function auto_replay($keyword){
         $keyword = trim($keyword);
-        $replay = Auto_replay::where('keyword','like',$keyword)->orderBy('updated_at','desc')->first();
+        $replay = Autoreplay::where('keyword','like',$keyword)->orderBy('updated_at','desc')->first();
         return $replay?$replay->content:null;
     }
     
-    public function send_get($url){
-    	$html = file_get_contents($url);
-		return $html;
-    }
-    
-    public	function send_post($url, $post_data) {
-		  $postdata = http_build_query($post_data);
-		  $options = array(
-		    'http' => array(
-		      'method' => 'POST',
-		      'header' => 'Content-type:application/x-www-form-urlencoded',
-		      'content' => $postdata,
-		      'timeout' => 15 * 60 // 超时时间（单位:s）
-		    )
-		  );
-		  $context = stream_context_create($options);
-		  $result = file_get_contents($url, false, $context);
-		  return $result;
-	}
 }

@@ -122,7 +122,7 @@ class MemberController extends Controller
     // 用户的积分记录
     public function coinlog(){
         $user = Auth::guard('web')->user();
-        $coinlog = Usercoinlog::where('user_id',"=",$user->id)->orderBy('id','desc')->paginate(10);
+        $coinlog = Usercoinlog::where('user_id',"=",$user->id)->orderBy('id','desc')->paginate(6);
         // dd($userorder);
         return view('member.coinlog',['user'=>$this->user,'coinlog'=>$coinlog ]);
     }

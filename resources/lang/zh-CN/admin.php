@@ -103,4 +103,12 @@ return [
     'prev'                   => '上一步',
     'next'                   => '下一步',
     'quick_create'           => '快速创建',
+    'Id'=>'ID',
+    'Title'=>'标题',
+    'Content'=>'内容',
+    'Remark'=>'备注',
+    'Deleted at'=>'删除于',
+    'Created at'=>'创建于',
+    'Updated at'=>'更新于',
+    'Manager id'=>'管理员',
 ];
